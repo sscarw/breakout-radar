@@ -5,6 +5,7 @@ load_dotenv()
 
 client = OpenAI()
 
+
 def get_embedding(text: str) -> list[float]:
     response = client.embeddings.create(
         input=text,

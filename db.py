@@ -1,5 +1,3 @@
-from PyQt5.QtWidgets.QMainWindow import metric
-
 from models import Repository, RepoMetrics, MetricPoint
 import psycopg
 import os

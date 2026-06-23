@@ -40,4 +40,3 @@ async def fetch_repo_metrics(full_name: str) -> RepoMetrics:
         )
         data = response.json()
         return RepoMetrics.model_validate(data)
-
