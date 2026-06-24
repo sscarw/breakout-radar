@@ -18,6 +18,7 @@ class RepoMetrics(BaseModel):
 
 
 class HNStory(BaseModel):
+    object_id: str = Field(..., alias='objectID')
     title: str | None = Field(None, alias='title')
     url: str | None = Field(None, alias='url')
     points: int = Field(..., alias='points')

@@ -1,6 +1,7 @@
 from db import save_scan_run, save_repository, save_metrics
 from github_client import search_repositories, fetch_repo_metrics
 from hn_client import search_hackernews
+from vector_store import get_qdrant_client, ensure_collection, save_discussion, search_discussions
 import asyncio
 from dotenv import load_dotenv
 
@@ -8,7 +9,7 @@ load_dotenv()
 
 
 async def main():
-    query = "ai agents for games"
+    query = "ai skills for it"
     scan_id = save_scan_run(query)
     repos = await search_repositories(query, limit=5)
     for repo in repos:
@@ -19,9 +20,16 @@ async def main():
 
     print(f"Saved {len(repos)} repos for scan run {scan_id}")
 
-    stories = await search_hackernews("crewai")
+    client = get_qdrant_client()
+    ensure_collection(client, "discussions")
+    stories = await search_hackernews("ai agent framework")
     for story in stories:
-        print(story.title, story.url, story.points)
+        save_discussion(client, "discussions", story)
+    print(f"Indexed {len(stories)} discussions")
+
+    results = search_discussions(client, "discussions", "tools for building autonomous AI agents", limit=5)
+    for r in results:
+        print(f"{r['score']:.3f}  {r['title']}")
 
 
 if __name__ == "__main__":
