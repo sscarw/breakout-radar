@@ -1,8 +1,9 @@
 from agents import Agent
-from models import SearchPlan, ProjectAnalysis
-import asyncio
 
-agent = Agent(
+from agent_tools import fetch_repo_metrics_tool, search_discussions_tool
+from models import SearchPlan, ProjectAnalysis
+
+query_planner_agent = Agent(
     name="Query Planner",
     instructions="""Role: Convert a user's request into an optimized search plan.
         
@@ -23,7 +24,7 @@ agent = Agent(
     output_type=SearchPlan
 )
 
-agent=Agent(
+analyst_agent = Agent(
     name="Analyst",
     instructions="""Role: Analyze an open-source repository and determine whether it shows strong breakout potential.
         
@@ -46,5 +47,8 @@ agent=Agent(
         - A positive sentiment alone is not sufficient if repository activity is declining.
         - Explain the reasoning behind the verdict using concise growth signals.
         - Focus on identifying promising early-stage open-source projects rather than already mature projects.""",
+    tools=[
+        fetch_repo_metrics_tool, search_discussions_tool
+    ],
     output_type=ProjectAnalysis
 )
