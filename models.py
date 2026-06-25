@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from datetime import datetime, date
+from typing import Literal
 
 
 class Repository(BaseModel):
@@ -30,3 +31,18 @@ class MetricPoint(BaseModel):
     stars: int
     forks: int
     open_issues: int
+
+
+class SearchPlan(BaseModel):
+    github_query: str
+    hn_query: str
+    explanation: str
+
+
+class ProjectAnalysis(BaseModel):
+    repository_name: str
+    momentum_score: float
+    sentiment: Literal['positive', 'neutral', 'negative']
+    growth_status: Literal["exploding", "growing", "stable", "declining", "dead"]
+    verdict: str
+    growth_signals: list[str]
