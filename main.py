@@ -1,7 +1,8 @@
-from db import save_scan_run, save_repository, save_metrics
+from db import save_scan_run, save_repository, save_metrics, get_metrics_history
+from scoring import calculate_momentum_score
 from github_client import search_repositories, fetch_repo_metrics
 from hn_client import search_hackernews
-from vector_store import get_qdrant_client, ensure_collection, save_discussion, search_discussions
+from vector_store import get_qdrant_client, ensure_collection, save_discussion
 import asyncio
 from dotenv import load_dotenv
 
@@ -27,9 +28,8 @@ async def main():
         save_discussion(client, "discussions", story)
     print(f"Indexed {len(stories)} discussions")
 
-    results = search_discussions(client, "discussions", "tools for building autonomous AI agents", limit=5)
-    for r in results:
-        print(f"{r['score']:.3f}  {r['title']}")
+    history = get_metrics_history(repository_id=1)
+    momentum = calculate_momentum_score(history)
 
 
 if __name__ == "__main__":

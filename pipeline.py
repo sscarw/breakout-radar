@@ -37,6 +37,7 @@ analyst_agent = Agent(
         5. Determine the project's growth status based on available evidence.
         6. Explain which signals indicate future growth or decline.
         7. Produce a structured ProjectAnalysis output.
+        8. Use the provided momentum_score value. Do not compute, estimate, or invent momentum_score.
         
         Guidelines:
         
