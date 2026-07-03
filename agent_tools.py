@@ -1,13 +1,7 @@
 from agents import function_tool
-from github_client import search_repositories, fetch_repo_metrics
+from github_client import fetch_repo_metrics
 from vector_store import get_qdrant_client, search_discussions
-from models import Repository, RepoMetrics
-
-
-
-async def search_repositories_tool(query: str, limit: int) -> list[Repository]:
-    """Use this to search GitHub repositories by query and return matching repositories."""
-    return await search_repositories(query, limit)
+from models import RepoMetrics
 
 
 @function_tool
