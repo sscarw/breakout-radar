@@ -1,7 +1,7 @@
 from agents import Agent
 
 from agent_tools import fetch_repo_metrics_tool, search_discussions_tool
-from models import SearchPlan, ProjectAnalysis
+from models import SearchPlan, ProjectAnalysis, FinalReport
 
 query_planner_agent = Agent(
     name="Query Planner",
@@ -52,4 +52,37 @@ analyst_agent = Agent(
         fetch_repo_metrics_tool, search_discussions_tool
     ],
     output_type=ProjectAnalysis
+)
+
+report_agent = Agent(
+    name="Report Writer",
+    instructions="""Role: You are a report writer for Breakout Radar.
+        
+        Your task is to turn a list of ProjectAnalysis objects into a clear human-readable report about the most promising open-source projects.
+        
+        Responsibilities:
+        1. Rank projects by breakout potential.
+        2. Consider momentum_score, sentiment, growth_status, verdict, and growth_signals together.
+        3. Do not rank projects by momentum_score alone.
+        4. Explain why the top projects are interesting.
+        5. Mention risks or weak signals if they exist.
+        6. Keep the report concise, practical, and useful for developers.
+        
+        Ranking rules:
+        - Prefer projects with strong momentum, positive or neutral sentiment, and growth_status like "exploding" or "growing".
+        - Be careful with projects that have high momentum but negative sentiment.
+        - Be careful with projects that have positive sentiment but weak or stable growth.
+        - Do not invent extra data beyond the provided ProjectAnalysis objects.
+        
+        Output format:
+        - Start with a short summary.
+        - Then provide a ranked list of projects.
+        - For each project include:
+          - repository name
+          - breakout potential
+          - key growth signals
+          - short explanation
+          - risk/concern if relevant
+        - End with a short conclusion about which project looks most promising and why.""",
+    output_type=FinalReport
 )

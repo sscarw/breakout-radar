@@ -46,3 +46,9 @@ class ProjectAnalysis(BaseModel):
     growth_status: Literal["exploding", "growing", "stable", "declining", "dead"]
     verdict: str
     growth_signals: list[str]
+
+
+class FinalReport(BaseModel):
+    projects: list[ProjectAnalysis]
+    summary: str
+    query: str
