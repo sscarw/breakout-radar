@@ -4,7 +4,7 @@ from models import FinalReport
 def format_report(report: FinalReport) -> str:
     blocks = []
     for i, project in enumerate(report.projects, start=1):
-        signals = "\n".join(f"-{s}" for s in project.growth_signals)
+        signals = "\n".join(f"- {s}" for s in project.growth_signals)
         block = f"""## {i}. {project.repository_name}
 - Momentum: {project.momentum_score:.2f}
 - Sentiment: {project.sentiment}

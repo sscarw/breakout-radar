@@ -19,11 +19,11 @@ class RepoMetrics(BaseModel):
 
 
 class HNStory(BaseModel):
-    object_id: str = Field(..., alias='objectID')
-    title: str | None = Field(None, alias='title')
-    url: str | None = Field(None, alias='url')
-    points: int = Field(..., alias='points')
-    num_comments: int = Field(..., alias='num_comments')
+    object_id: str = Field(..., alias="objectID")
+    title: str | None = Field(None, alias="title")
+    url: str | None = Field(None, alias="url")
+    points: int = Field(default=0, alias="points")
+    num_comments: int = Field(default=0, alias="num_comments")
 
 
 class MetricPoint(BaseModel):
