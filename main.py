@@ -4,6 +4,7 @@ from scoring import calculate_momentum_score
 from github_client import search_repositories, fetch_repo_metrics
 from hn_client import search_hackernews
 from vector_store import get_qdrant_client, ensure_collection, save_discussion
+from report_formatter import format_report
 import pipeline
 import asyncio
 from dotenv import load_dotenv
