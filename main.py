@@ -43,7 +43,7 @@ async def main():
 
     analyses_text = "\n\n".join(a.model_dump_json(indent=2) for a in analyses)
     report = (await Runner.run(pipeline.report_agent, analyses_text)).final_output
-    print(report)
+    print(format_report(report))
 
 
 if __name__ == "__main__":
