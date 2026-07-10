@@ -256,32 +256,3 @@ breakout-radar/
 ├── schema.sql           # Database schema
 └── docker-compose.yml   # PostgreSQL + Qdrant
 ```
-
----
-
-## Future improvements
-
-- Scheduled scans (cron or cloud deployment) to accumulate momentum history automatically
-- GitHub Actions or a background worker for daily metric collection
-- Reddit as an optional third discussion source
-- Bootstrap historical repository data from GH Archive / BigQuery
-- Analyze discussion comments, not only titles, for richer sentiment
-- Add GitHub Issues and Discussions as additional community signals
-- A small web dashboard for browsing reports
-- Alerting when a tracked repository starts accelerating
-
----
-
-## What I learned
-
-Building Breakout Radar involved:
-
-- multi-agent orchestration with OpenAI Agents SDK
-- structured outputs with Pydantic
-- async API integration with GitHub and Hacker News
-- PostgreSQL schema design for time-series metrics
-- vector search with Qdrant, embeddings, and RAG
-- Docker-based local infrastructure
-- separating deterministic code from AI reasoning
-
-The project demonstrates how LLM agents can work together with real APIs, databases, and retrieval systems to build a practical AI/backend application.
