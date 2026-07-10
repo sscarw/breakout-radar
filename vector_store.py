@@ -25,6 +25,8 @@ def ensure_collection(client: QdrantClient, collection_name: str) -> None:
 
 
 def save_discussion(client: QdrantClient, collection_name: str, story: HNStory) -> None:
+    if not story.title:
+        return
     vector = get_embedding(story.title)
     points = [
         PointStruct(

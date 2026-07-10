@@ -1,0 +1,7 @@
+openai-agents
+openai
+qdrant-client
+psycopg[binary]==3.3.4
+httpx
+pydantic
+python-dotenv
