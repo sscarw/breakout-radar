@@ -176,8 +176,6 @@ POSTGRES_PORT=5432
 QDRANT_URL=http://localhost:6333
 ```
 
-> Do not commit real API keys. `.env` is git-ignored.
-
 ### 4. Install dependencies
 
 ```bash
